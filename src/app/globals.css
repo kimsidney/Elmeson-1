@@ -96,11 +96,11 @@ body {
 }
 
 /* Ensure links have sufficient contrast */
-a:not(.bg-primary):not(.bg-secondary) {
+a:not(.bg-primary):not(.bg-secondary):not([class*="text-white"]) {
   color: #1F2937; /* Dark gray for better contrast */
 }
 
-a:hover:not(.bg-primary):not(.bg-secondary) {
+a:hover:not(.bg-primary):not(.bg-secondary):not([class*="text-white"]) {
   color: var(--primary);
 }
 
@@ -234,6 +234,25 @@ nav[role="navigation"] button[aria-haspopup] span,
 nav[role="navigation"] a[href] span {
   font-size: 0.75rem !important; /* text-xs = 12px */
   font-weight: 500 !important; /* font-medium */
+}
+
+/* Ensure white text on transparent navbar */
+nav[role="navigation"] .text-white,
+nav[role="navigation"] a.text-white,
+nav[role="navigation"] button.text-white,
+nav[role="navigation"] span.text-white {
+  color: white !important;
+}
+
+/* Preserve hover effects - gray on transparent, orange on white background */
+nav[role="navigation"] a.hover\:text-gray-200:hover,
+nav[role="navigation"] button.hover\:text-gray-200:hover {
+  color: #e5e7eb !important; /* gray-200 for transparent navbar */
+}
+
+nav[role="navigation"] a.hover\:text-primary:hover,
+nav[role="navigation"] button.hover\:text-primary:hover {
+  color: var(--primary) !important; /* orange for white navbar */
 }
 
 @media (hover: none) and (pointer: coarse) {

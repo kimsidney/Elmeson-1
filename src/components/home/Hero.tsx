@@ -22,6 +22,17 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-black/50 bg-gradient-to-b from-black/70 via-black/20 to-black/80" aria-hidden="true" />
             </div>
 
+            {/* Oval Overlay behind text */}
+            <div 
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[5] bg-black/60"
+                style={{
+                    width: 'min(90vw, 800px)',
+                    height: 'min(60vh, 500px)',
+                    borderRadius: '50%'
+                }}
+                aria-hidden="true"
+            />
+
             {/* Content */}
             <div className="relative z-10 text-center px-6 sm:px-4 max-w-4xl mx-auto space-y-4 sm:space-y-6">
                 <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white font-script drop-shadow-lg">

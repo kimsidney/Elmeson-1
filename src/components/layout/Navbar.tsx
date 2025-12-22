@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X, Facebook, Instagram, ChevronDown } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -26,6 +27,12 @@ const NAV_ITEMS = [
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const pathname = usePathname();
+    
+    // Determine if navbar should be transparent (only on home page initially)
+    // Default to transparent on home page until scroll is detected
+    const isTransparent = pathname === "/" && !isScrolled;
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const menuButtonRef = useRef<HTMLButtonElement>(null);
     const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -172,8 +179,70 @@ export default function Navbar() {
         };
     }, []);
 
+    // Scroll detection for transparent navbar on home page
+    useEffect(() => {
+        // Only apply transparent navbar on home page
+        if (pathname !== "/") {
+            setIsScrolled(true);
+            return;
+        }
+
+        const handleScroll = () => {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const heroSection = document.querySelector('section[role="banner"]');
+            
+            if (heroSection) {
+                const heroHeight = heroSection.getBoundingClientRect().height;
+                // Add a small threshold (50px) to trigger transition slightly before leaving hero
+                setIsScrolled(scrollY > heroHeight - 50);
+            } else {
+                // If hero section not found, check if we're at the top
+                setIsScrolled(scrollY > 50);
+            }
+        };
+
+        // Check initial scroll position immediately
+        // Use a small delay to ensure DOM is ready
+        const checkInitial = () => {
+            if (window.scrollY === 0) {
+                setIsScrolled(false);
+            }
+            handleScroll();
+        };
+        
+        // Run immediately and after a short delay to catch any layout shifts
+        checkInitial();
+        const timeoutId = setTimeout(checkInitial, 100);
+
+        // Debounce scroll events for better performance
+        let ticking = false;
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    handleScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            if (timeoutId) clearTimeout(timeoutId);
+        };
+    }, [pathname]);
+    
     return (
-        <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm" role="navigation" aria-label="Main navigation">
+        <nav 
+            className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+                isTransparent 
+                    ? "bg-black/50 backdrop-blur-md border-transparent" 
+                    : "bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm"
+            }`} 
+            role="navigation" 
+            aria-label="Main navigation"
+        >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
@@ -205,13 +274,24 @@ export default function Navbar() {
                                     {item.dropdown ? (
                                         <>
                                             <button
-                                                className="text-gray-700 hover:text-primary transition-colors duration-200 px-2 py-2 rounded-md text-xs font-medium uppercase tracking-wide flex items-center space-x-1 min-h-[44px] whitespace-nowrap"
+                                                className={`transition-all duration-300 px-2 py-2 rounded-md text-xs font-medium uppercase tracking-wide flex items-center space-x-1 min-h-[44px] whitespace-nowrap ${
+                                                    isTransparent 
+                                                        ? "text-white hover:text-gray-200" 
+                                                        : "text-gray-700 hover:text-primary"
+                                                }`}
+                                                style={isTransparent ? { color: 'white' } : undefined}
                                                 aria-expanded={dropdownOpen === item.name}
                                                 aria-haspopup="true"
                                                 onKeyDown={(e) => handleDropdownKeyDown(e, item.name, item)}
                                             >
-                                                <span className="text-xs font-medium">{item.name}</span>
-                                                <ChevronDown size={16} aria-hidden="true" />
+                                                <span className={`text-xs font-medium`} style={isTransparent ? { color: 'white' } : undefined}>{item.name}</span>
+                                                <ChevronDown 
+                                                    size={16} 
+                                                    className="transition-colors duration-300"
+                                                    style={isTransparent ? { color: 'white' } : { color: '#4B5563' }}
+                                                    strokeWidth={2}
+                                                    aria-hidden="true" 
+                                                />
                                             </button>
                                             {dropdownOpen === item.name && (
                                                 <div className="absolute left-0 top-full pt-2">
@@ -240,7 +320,12 @@ export default function Navbar() {
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className="text-gray-700 hover:text-primary transition-colors duration-200 px-2 py-2 rounded-md text-xs font-medium uppercase tracking-wide min-h-[44px] flex items-center whitespace-nowrap text-xs"
+                                            className={`transition-all duration-300 px-2 py-2 rounded-md text-xs font-medium uppercase tracking-wide min-h-[44px] flex items-center whitespace-nowrap ${
+                                                isTransparent 
+                                                    ? "hover:text-gray-200" 
+                                                    : "hover:text-primary"
+                                            }`}
+                                            style={isTransparent ? { color: 'white' } : { color: '#374151' }}
                                         >
                                             {item.name}
                                         </Link>
@@ -252,11 +337,33 @@ export default function Navbar() {
 
                     {/* Social Icons (Desktop) */}
                     <div className="hidden lg:flex items-center space-x-3">
-                        <Link href="https://www.facebook.com/ElMesonKeyWest/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-primary p-2 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" aria-label="Visit us on Facebook">
-                            <Facebook size={24} aria-hidden="true" />
+                        <Link 
+                            href="https://www.facebook.com/ElMesonKeyWest/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className={`transition-all duration-300 p-2 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                                isTransparent 
+                                    ? "hover:text-gray-200 hover:bg-white/10" 
+                                    : "hover:text-primary hover:bg-gray-100"
+                            }`}
+                            style={isTransparent ? { color: 'white' } : { color: '#374151' }}
+                            aria-label="Visit us on Facebook"
+                        >
+                            <Facebook size={24} strokeWidth={1.5} aria-hidden="true" />
                         </Link>
-                        <Link href="https://www.instagram.com/elmesondepepe/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-primary p-2 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" aria-label="Visit us on Instagram">
-                            <Instagram size={24} aria-hidden="true" />
+                        <Link 
+                            href="https://www.instagram.com/elmesondepepe/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className={`transition-all duration-300 p-2 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                                isTransparent 
+                                    ? "hover:text-gray-200 hover:bg-white/10" 
+                                    : "hover:text-primary hover:bg-gray-100"
+                            }`}
+                            style={isTransparent ? { color: 'white' } : { color: '#374151' }}
+                            aria-label="Visit us on Instagram"
+                        >
+                            <Instagram size={24} strokeWidth={1.5} aria-hidden="true" />
                         </Link>
                     </div>
 
@@ -265,12 +372,21 @@ export default function Navbar() {
                         <button
                             ref={menuButtonRef}
                             onClick={() => setIsOpen(!isOpen)}
-                            className="text-gray-700 hover:text-primary p-3 rounded-md min-h-[44px] min-w-[44px] flex items-center justify-center"
+                            className={`transition-all duration-300 p-3 rounded-md min-h-[44px] min-w-[44px] flex items-center justify-center ${
+                                isTransparent 
+                                    ? "hover:text-gray-200" 
+                                    : "hover:text-primary"
+                            }`}
+                            style={isTransparent ? { color: 'white' } : { color: '#374151' }}
                             aria-label={isOpen ? "Close menu" : "Open menu"}
                             aria-expanded={isOpen}
                             aria-controls="mobile-menu"
                         >
-                            {isOpen ? <X size={26} aria-hidden="true" /> : <Menu size={26} aria-hidden="true" />}
+                            {isOpen ? (
+                                <X size={26} strokeWidth={2} aria-hidden="true" />
+                            ) : (
+                                <Menu size={26} strokeWidth={2} aria-hidden="true" />
+                            )}
                         </button>
                     </div>
                 </div>
