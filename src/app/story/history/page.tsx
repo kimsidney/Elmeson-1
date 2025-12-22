@@ -11,6 +11,9 @@ export default function HistoryPage() {
                         alt="History of Key West and Cuba"
                         fill
                         className="object-cover brightness-75"
+                        loading="lazy"
+                        quality={85}
+                        sizes="100vw"
                     />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30" />

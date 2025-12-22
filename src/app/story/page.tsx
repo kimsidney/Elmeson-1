@@ -17,6 +17,9 @@ export default function StoryPage() {
                             alt="The Diaz Family"
                             fill
                             className="object-cover"
+                            loading="lazy"
+                            quality={85}
+                            sizes="(max-width: 768px) 100vw, 768px"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
                     </div>

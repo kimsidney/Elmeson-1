@@ -39,6 +39,8 @@ export default function InfoSection() {
                             fill
                             className="object-cover hover:scale-105 transition-transform duration-700"
                             sizes="(max-width: 768px) 100vw, 50vw"
+                            loading="lazy"
+                            quality={85}
                         />
                         <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl" aria-hidden="true" />
                     </div>

@@ -15,6 +15,9 @@ export default function SunsetCelebrationPage() {
                             alt="Live music at sunset"
                             fill
                             className="object-cover brightness-75"
+                            loading="lazy"
+                            quality={85}
+                            sizes="50vw"
                         />
                     </div>
                     {/* Right side - Sunset crowd */}
@@ -24,6 +27,9 @@ export default function SunsetCelebrationPage() {
                             alt="Sunset celebration crowd"
                             fill
                             className="object-cover brightness-90"
+                            loading="lazy"
+                            quality={85}
+                            sizes="50vw"
                         />
                     </div>
                 </div>

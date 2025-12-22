@@ -5,16 +5,26 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
   title: "El Meson de Pepe - Authentic Cuban Food",
   description: "Experience the authentic taste of Cuba at El Meson de Pepe in Mallory Square, Key West. Family owned and operated since 1984.",
+  metadataBase: new URL("https://www.elmeson.co"),
+  openGraph: {
+    title: "El Meson de Pepe - Authentic Cuban Food",
+    description: "Experience the authentic taste of Cuba at El Meson de Pepe in Mallory Square, Key West. Family owned and operated since 1984.",
+    type: "website",
+  },
 };
 
 import Navbar from "@/components/layout/Navbar";

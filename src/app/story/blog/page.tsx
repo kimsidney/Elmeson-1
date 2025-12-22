@@ -73,6 +73,9 @@ export default function BlogPage() {
                                     alt={post.title}
                                     fill
                                     className="object-cover"
+                                    loading="lazy"
+                                    quality={85}
+                                    sizes="(max-width: 768px) 100vw, 33vw"
                                 />
                             </div>
 
