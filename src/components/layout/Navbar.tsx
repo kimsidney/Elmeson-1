@@ -69,7 +69,7 @@ export default function Navbar() {
 
                     {/* Desktop Menu */}
                     <div className="hidden lg:block">
-                        <div className="ml-10 flex items-baseline space-x-6 xl:space-x-8">
+                        <div className="ml-10 flex items-baseline space-x-4 xl:space-x-5 flex-nowrap">
                             {NAV_ITEMS.map((item) => (
                                 <div
                                     key={item.name}
@@ -80,7 +80,7 @@ export default function Navbar() {
                                     {item.dropdown ? (
                                         <>
                                             <button
-                                                className="text-gray-700 hover:text-primary transition-colors duration-200 px-3 py-2 rounded-md text-sm font-medium uppercase tracking-wide flex items-center space-x-1 min-h-[44px]"
+                                                className="text-gray-700 hover:text-primary transition-colors duration-200 px-2 py-2 rounded-md text-xs font-medium uppercase tracking-wide flex items-center space-x-1 min-h-[44px] whitespace-nowrap"
                                                 aria-expanded={dropdownOpen === item.name}
                                                 aria-haspopup="true"
                                             >
@@ -106,7 +106,7 @@ export default function Navbar() {
                                     ) : (
                                         <Link
                                             href={item.href}
-                                            className="text-gray-700 hover:text-primary transition-colors duration-200 px-3 py-2 rounded-md text-sm font-medium uppercase tracking-wide min-h-[44px] flex items-center"
+                                            className="text-gray-700 hover:text-primary transition-colors duration-200 px-2 py-2 rounded-md text-xs font-medium uppercase tracking-wide min-h-[44px] flex items-center whitespace-nowrap"
                                         >
                                             {item.name}
                                         </Link>
