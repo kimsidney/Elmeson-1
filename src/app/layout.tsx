@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Great_Vibes, Playfair_Display } from "next/font/google";
+import { Geist, Great_Vibes, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -10,19 +10,12 @@ const geistSans = Geist({
   preload: true,
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
-});
-
 const greatVibes = Great_Vibes({
   variable: "--font-script",
   subsets: ["latin"],
   weight: "400",
   display: "swap",
-  preload: true,
+  preload: false, // Decorative font - don't preload
 });
 
 const playfairDisplay = Playfair_Display({
@@ -97,8 +90,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preconnect hints for faster third-party resource loading */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${greatVibes.variable} ${playfairDisplay.variable} antialiased`}
+        className={`${geistSans.variable} ${greatVibes.variable} ${playfairDisplay.variable} antialiased`}
       >
         <OrganizationSchema />
         <a href="#main-content" className="skip-link">
@@ -108,21 +108,22 @@ export default function RootLayout({
         <main id="main-content" aria-label="Main content">{children}</main>
         <Footer />
         <CookieBanner />
+        {/* Deferred third-party scripts for better mobile performance */}
         <Script
           id="sa-dynamic-optimization"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `var script = document.createElement("script");script.setAttribute("nowprocket", "");script.setAttribute("nitro-exclude", "");script.src = "https://seo.ymbs.pro/scripts/dynamic_optimization.js";script.dataset.uuid = "f1f7b153-6650-4384-b863-b4f3c9330d09";script.id = "sa-dynamic-optimization-loader";document.head.appendChild(script);`,
           }}
         />
-        {/* Google Analytics 4 */}
+        {/* Google Analytics 4 - deferred for mobile performance */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-0YWZC8X9PH"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <Script
           id="google-analytics"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

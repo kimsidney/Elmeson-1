@@ -180,6 +180,7 @@ export default function Navbar() {
     }, []);
 
     // Scroll detection for transparent navbar on home page
+    // Optimized with throttling for better mobile performance
     useEffect(() => {
         // Only apply transparent navbar on home page
         if (pathname !== "/") {
@@ -187,22 +188,29 @@ export default function Navbar() {
             return;
         }
 
+        // Cache hero height to avoid repeated DOM queries
+        let cachedHeroHeight: number | null = null;
+        
+        const getHeroHeight = () => {
+            if (cachedHeroHeight === null) {
+                const heroSection = document.querySelector('section[role="banner"]');
+                cachedHeroHeight = heroSection ? heroSection.getBoundingClientRect().height : 0;
+            }
+            return cachedHeroHeight;
+        };
+
         const handleScroll = () => {
-            const scrollY = window.scrollY || window.pageYOffset;
-            const heroSection = document.querySelector('section[role="banner"]');
+            const scrollY = window.scrollY;
+            const heroHeight = getHeroHeight();
             
-            if (heroSection) {
-                const heroHeight = heroSection.getBoundingClientRect().height;
-                // Add a small threshold (50px) to trigger transition slightly before leaving hero
+            if (heroHeight > 0) {
                 setIsScrolled(scrollY > heroHeight - 50);
             } else {
-                // If hero section not found, check if we're at the top
                 setIsScrolled(scrollY > 50);
             }
         };
 
-        // Check initial scroll position immediately
-        // Use a small delay to ensure DOM is ready
+        // Check initial scroll position
         const checkInitial = () => {
             if (window.scrollY === 0) {
                 setIsScrolled(false);
@@ -210,25 +218,32 @@ export default function Navbar() {
             handleScroll();
         };
         
-        // Run immediately and after a short delay to catch any layout shifts
         checkInitial();
         const timeoutId = setTimeout(checkInitial, 100);
 
-        // Debounce scroll events for better performance
-        let ticking = false;
+        // Throttled scroll handler for better mobile performance
+        let lastScrollTime = 0;
+        const SCROLL_THROTTLE = 100; // Only process scroll every 100ms
+        
         const onScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    handleScroll();
-                    ticking = false;
-                });
-                ticking = true;
-            }
+            const now = Date.now();
+            if (now - lastScrollTime < SCROLL_THROTTLE) return;
+            lastScrollTime = now;
+            
+            window.requestAnimationFrame(handleScroll);
+        };
+
+        // Reset cached height on resize
+        const onResize = () => {
+            cachedHeroHeight = null;
         };
 
         window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onResize, { passive: true });
+        
         return () => {
             window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", onResize);
             if (timeoutId) clearTimeout(timeoutId);
         };
     }, [pathname]);
