@@ -1,5 +1,19 @@
 import Link from "next/link";
-import { Facebook, Instagram, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Instagram, Linkedin, MapPin, Phone, Mail } from "lucide-react";
+
+// Custom TikTok icon component since lucide-react doesn't include it
+const TikTokIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+  </svg>
+);
 
 export default function Footer() {
     return (
@@ -16,11 +30,17 @@ export default function Footer() {
                             </p>
                         </div>
                         <div className="flex space-x-6">
-                            <Link href="https://facebook.com" className="text-gray-500 hover:text-primary transition-colors p-2 -m-2 min-h-[44px] min-w-[44px] flex items-center justify-center transform hover:scale-110 duration-200" aria-label="Visit us on Facebook">
+                            <Link href="https://www.facebook.com/ElMesonKeyWest/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors p-2 -m-2 min-h-[44px] min-w-[44px] flex items-center justify-center transform hover:scale-110 duration-200" aria-label="Visit us on Facebook">
                                 <Facebook size={24} aria-hidden="true" />
                             </Link>
-                            <Link href="https://instagram.com" className="text-gray-500 hover:text-primary transition-colors p-2 -m-2 min-h-[44px] min-w-[44px] flex items-center justify-center transform hover:scale-110 duration-200" aria-label="Visit us on Instagram">
+                            <Link href="https://www.instagram.com/elmesondepepe/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors p-2 -m-2 min-h-[44px] min-w-[44px] flex items-center justify-center transform hover:scale-110 duration-200" aria-label="Visit us on Instagram">
                                 <Instagram size={24} aria-hidden="true" />
+                            </Link>
+                            <Link href="https://www.linkedin.com/company/el-meson-de-pepe" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors p-2 -m-2 min-h-[44px] min-w-[44px] flex items-center justify-center transform hover:scale-110 duration-200" aria-label="Visit us on LinkedIn">
+                                <Linkedin size={24} aria-hidden="true" />
+                            </Link>
+                            <Link href="https://www.tiktok.com/@elmesondepepe" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors p-2 -m-2 min-h-[44px] min-w-[44px] flex items-center justify-center transform hover:scale-110 duration-200" aria-label="Visit us on TikTok">
+                                <TikTokIcon size={24} />
                             </Link>
                         </div>
                     </div>

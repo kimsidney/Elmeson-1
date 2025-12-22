@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, ArrowRight } from "lucide-react";
+import { BreadcrumbSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Pepe's Key West Blog - Stories & Guides",
+  description: "Read stories, guides, and insights from El Meson de Pepe. Discover the best Cuban experiences, Key West dining, and local culture.",
+  openGraph: {
+    title: "Pepe's Key West Blog - Stories & Guides | El Meson de Pepe",
+    description: "Read stories, guides, and insights from El Meson de Pepe. Discover the best Cuban experiences in Key West.",
+    url: "https://www.elmeson.co/story/blog",
+  },
+  alternates: {
+    canonical: "/story/blog",
+  },
+};
 
 const BLOG_POSTS = [
     {
@@ -49,7 +64,13 @@ const BLOG_POSTS = [
 
 export default function BlogPage() {
     return (
-        <div className="bg-white min-h-screen pt-32 pb-20 px-4">
+        <>
+            <BreadcrumbSchema items={[
+                { name: "Home", url: "/" },
+                { name: "Our Story", url: "/story" },
+                { name: "Pepe's Key West Blog", url: "/story/blog" },
+            ]} />
+            <div className="bg-white min-h-screen pt-32 pb-20 px-4">
             <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-6xl font-bold text-primary font-serif mb-4">
@@ -114,5 +135,6 @@ export default function BlogPage() {
                 </div>
             </div>
         </div>
+        </>
     );
 }

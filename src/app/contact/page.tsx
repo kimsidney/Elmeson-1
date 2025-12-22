@@ -1,8 +1,28 @@
+import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { BreadcrumbSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Contact Us - Visit El Meson de Pepe in Key West",
+  description: "Contact El Meson de Pepe in Mallory Square, Key West. Call us at 305-295-2620 or visit us at 410 Wall Street. Open daily 11 AM - 10 PM.",
+  openGraph: {
+    title: "Contact Us - Visit El Meson de Pepe in Key West",
+    description: "Contact El Meson de Pepe in Mallory Square, Key West. Call us at 305-295-2620 or visit us at 410 Wall Street.",
+    url: "https://www.elmeson.co/contact",
+  },
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 export default function ContactPage() {
     return (
-        <div className="bg-white min-h-screen pt-32 pb-20 px-4">
+        <>
+            <BreadcrumbSchema items={[
+                { name: "Home", url: "/" },
+                { name: "Contact Us", url: "/contact" },
+            ]} />
+            <div className="bg-white min-h-screen pt-32 pb-20 px-4">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-6xl font-bold text-primary font-serif mb-4">Contact Us</h1>
@@ -69,5 +89,6 @@ export default function ContactPage() {
                 </div>
             </div>
         </div>
+        </>
     );
 }

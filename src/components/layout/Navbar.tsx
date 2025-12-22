@@ -120,10 +120,10 @@ export default function Navbar() {
 
                     {/* Social Icons (Desktop) */}
                     <div className="hidden lg:flex items-center space-x-4">
-                        <Link href="https://facebook.com" target="_blank" className="text-gray-600 hover:text-primary p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Visit us on Facebook">
+                        <Link href="https://www.facebook.com/ElMesonKeyWest/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Visit us on Facebook">
                             <Facebook size={20} aria-hidden="true" />
                         </Link>
-                        <Link href="https://instagram.com" target="_blank" className="text-gray-600 hover:text-primary p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Visit us on Instagram">
+                        <Link href="https://www.instagram.com/elmesondepepe/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Visit us on Instagram">
                             <Instagram size={20} aria-hidden="true" />
                         </Link>
                     </div>
@@ -186,10 +186,10 @@ export default function Navbar() {
                             </div>
                         ))}
                         <div className="flex justify-center space-x-8 pt-8 pb-8">
-                            <Link href="https://facebook.com" target="_blank" className="text-gray-600 hover:text-primary p-3 bg-gray-100 rounded-full" aria-label="Visit us on Facebook">
+                            <Link href="https://www.facebook.com/ElMesonKeyWest/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary p-3 bg-gray-100 rounded-full" aria-label="Visit us on Facebook">
                                 <Facebook size={28} aria-hidden="true" />
                             </Link>
-                            <Link href="https://instagram.com" target="_blank" className="text-gray-600 hover:text-primary p-3 bg-gray-100 rounded-full" aria-label="Visit us on Instagram">
+                            <Link href="https://www.instagram.com/elmesondepepe/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary p-3 bg-gray-100 rounded-full" aria-label="Visit us on Instagram">
                                 <Instagram size={28} aria-hidden="true" />
                             </Link>
                         </div>

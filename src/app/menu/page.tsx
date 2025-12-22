@@ -1,6 +1,36 @@
+import type { Metadata } from "next";
+import { MenuSchema, BreadcrumbSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Menu - Authentic Cuban Cuisine",
+  description: "Explore our authentic Cuban menu featuring traditional dishes like Ropa Vieja, Lechón Asado, and Picadillo. Appetizers, entrees, and Cuban cocktails at El Meson de Pepe.",
+  openGraph: {
+    title: "Menu - Authentic Cuban Cuisine | El Meson de Pepe",
+    description: "Explore our authentic Cuban menu featuring traditional dishes from Cuba. Key West's premier Cuban restaurant.",
+    url: "https://www.elmeson.co/menu",
+    images: [
+      {
+        url: "/images/food_intro.png",
+        width: 1200,
+        height: 630,
+        alt: "El Meson de Pepe Cuban Menu",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/menu",
+  },
+};
+
 export default function MenuPage() {
     return (
-        <div className="bg-white min-h-screen pt-32 pb-20 px-4">
+        <>
+            <MenuSchema />
+            <BreadcrumbSchema items={[
+                { name: "Home", url: "/" },
+                { name: "Menu", url: "/menu" },
+            ]} />
+            <div className="bg-white min-h-screen pt-32 pb-20 px-4">
             <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-6xl font-bold text-primary font-serif mb-4">Our Menu</h1>
@@ -49,6 +79,7 @@ export default function MenuPage() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

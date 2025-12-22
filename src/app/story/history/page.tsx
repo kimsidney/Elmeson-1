@@ -1,8 +1,29 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { BreadcrumbSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "History of Key West and Cuba - El Meson de Pepe",
+  description: "Discover the fascinating history connecting Key West and Cuba. Learn about the cultural and culinary ties that have shaped both islands for over 175 years.",
+  openGraph: {
+    title: "History of Key West and Cuba - El Meson de Pepe",
+    description: "Discover the fascinating history connecting Key West and Cuba. Learn about the cultural and culinary ties that have shaped both islands.",
+    url: "https://www.elmeson.co/story/history",
+  },
+  alternates: {
+    canonical: "/story/history",
+  },
+};
 
 export default function HistoryPage() {
     return (
-        <div className="bg-white min-h-screen">
+        <>
+            <BreadcrumbSchema items={[
+                { name: "Home", url: "/" },
+                { name: "Our Story", url: "/story" },
+                { name: "History of Key West and Cuba", url: "/story/history" },
+            ]} />
+            <div className="bg-white min-h-screen">
             {/* Hero Section */}
             <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0">
@@ -55,5 +76,6 @@ export default function HistoryPage() {
                 </div>
             </section>
         </div>
+        </>
     );
 }

@@ -1,8 +1,36 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { BreadcrumbSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Our Story - Family Tradition & Cuban Heritage",
+  description: "Learn about El Meson de Pepe's history, founded by Pepe Diaz in 1984. Discover our family's journey from Cuba to Key West and our commitment to authentic Cuban cuisine.",
+  openGraph: {
+    title: "Our Story - Family Tradition & Cuban Heritage | El Meson de Pepe",
+    description: "Learn about El Meson de Pepe's history, founded by Pepe Diaz in 1984. Discover our family's journey from Cuba to Key West.",
+    url: "https://www.elmeson.co/story",
+    images: [
+      {
+        url: "/images/hero.png",
+        width: 1200,
+        height: 630,
+        alt: "El Meson de Pepe - Our Story",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/story",
+  },
+};
 
 export default function StoryPage() {
     return (
-        <div className="bg-white min-h-screen pt-32 pb-20 px-4">
+        <>
+            <BreadcrumbSchema items={[
+                { name: "Home", url: "/" },
+                { name: "Our Story", url: "/story" },
+            ]} />
+            <div className="bg-white min-h-screen pt-32 pb-20 px-4">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-6xl font-bold text-primary font-serif mb-4">Our Story</h1>
@@ -43,5 +71,6 @@ export default function StoryPage() {
                 </div>
             </div>
         </div>
+        </>
     );
 }

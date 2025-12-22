@@ -1,8 +1,28 @@
+import type { Metadata } from "next";
 import { Users, Utensils, Music, Wine, Phone, Mail } from "lucide-react";
+import { BreadcrumbSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Private Parties & Events - El Meson de Pepe Key West",
+  description: "Host your private party or event at El Meson de Pepe in Key West. Custom catering, live music, and authentic Cuban cuisine for your special occasion.",
+  openGraph: {
+    title: "Private Parties & Events - El Meson de Pepe Key West",
+    description: "Host your private party or event at El Meson de Pepe in Key West. Custom catering and authentic Cuban cuisine.",
+    url: "https://www.elmeson.co/parties",
+  },
+  alternates: {
+    canonical: "/parties",
+  },
+};
 
 export default function PrivatePartiesPage() {
     return (
-        <div className="bg-white min-h-screen">
+        <>
+            <BreadcrumbSchema items={[
+                { name: "Home", url: "/" },
+                { name: "Private Parties", url: "/parties" },
+            ]} />
+            <div className="bg-white min-h-screen">
             {/* Hero Section */}
             <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-100 to-white">
                 <div className="relative z-10 text-center px-4">
@@ -228,5 +248,6 @@ export default function PrivatePartiesPage() {
                 </div>
             </section>
         </div>
+        </>
     );
 }
