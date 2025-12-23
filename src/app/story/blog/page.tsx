@@ -7,10 +7,21 @@ import { BreadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Pepe's Key West Blog - Stories & Guides",
   description: "Read stories, guides, and insights from El Meson de Pepe. Discover the best Cuban experiences, Key West dining, and local culture.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Pepe's Key West Blog - Stories & Guides | El Meson de Pepe",
     description: "Read stories, guides, and insights from El Meson de Pepe. Discover the best Cuban experiences in Key West.",
-    url: "https://www.elmeson.co/story/blog",
+    url: "https://www.elmesondepepe.com/story/blog",
   },
   alternates: {
     canonical: "/story/blog",
@@ -23,42 +34,42 @@ const BLOG_POSTS = [
         excerpt: "Discover the best Cuban experiences in Key West, from authentic restaurants to cultural landmarks.",
         date: "December 15, 2024",
         slug: "#",
-        image: "/images/hero.png"
+        image: "/images/hero.webp"
     },
     {
         title: "Best Places to Watch the Sunset in Key West",
         excerpt: "Key West is famous for its sunsets. Here are the top spots to catch the most breathtaking views.",
         date: "December 10, 2024",
         slug: "#",
-        image: "/images/hero.png"
+        image: "/images/hero.webp"
     },
     {
         title: "Finding the Best Tapas in Key West",
         excerpt: "A guide to the finest tapas and small plates in Key West, featuring authentic Cuban flavors.",
         date: "December 5, 2024",
         slug: "#",
-        image: "/images/hero.png"
+        image: "/images/hero.webp"
     },
     {
         title: "Best Restaurants in Key West with Live Music",
         excerpt: "Experience the vibrant nightlife of Key West with live music and delicious food.",
         date: "November 28, 2024",
         slug: "#",
-        image: "/images/hero.png"
+        image: "/images/hero.webp"
     },
     {
         title: "Best Family-Friendly Restaurants in Key West",
         excerpt: "Planning a family trip? Here are the best restaurants that cater to all ages.",
         date: "November 20, 2024",
         slug: "#",
-        image: "/images/hero.png"
+        image: "/images/hero.webp"
     },
     {
         title: "Best Local Spots to Try in Key West",
         excerpt: "Go off the beaten path and discover the hidden gems that locals love.",
         date: "November 15, 2024",
         slug: "#",
-        image: "/images/hero.png"
+        image: "/images/hero.webp"
     },
 ];
 

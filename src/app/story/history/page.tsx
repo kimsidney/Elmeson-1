@@ -5,10 +5,21 @@ import { BreadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "History of Key West and Cuba - El Meson de Pepe",
   description: "Discover the fascinating history connecting Key West and Cuba. Learn about the cultural and culinary ties that have shaped both islands for over 175 years.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "History of Key West and Cuba - El Meson de Pepe",
     description: "Discover the fascinating history connecting Key West and Cuba. Learn about the cultural and culinary ties that have shaped both islands.",
-    url: "https://www.elmeson.co/story/history",
+    url: "https://www.elmesondepepe.com/story/history",
   },
   alternates: {
     canonical: "/story/history",
@@ -28,13 +39,15 @@ export default function HistoryPage() {
             <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0">
                     <Image
-                        src="/images/hero.png"
+                        src="/images/hero.webp"
                         alt="History of Key West and Cuba"
                         fill
                         className="object-cover brightness-75"
                         loading="lazy"
                         quality={85}
                         sizes="100vw"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30" />

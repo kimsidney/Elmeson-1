@@ -21,9 +21,9 @@ export function RestaurantSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
-    "@id": "https://www.elmeson.co/#restaurant",
+    "@id": "https://www.elmesondepepe.com/#restaurant",
     name: "El Meson de Pepe",
-    image: "https://www.elmeson.co/images/el-meson-de-pepe-key-west-logo.webp",
+    image: "https://www.elmesondepepe.com/images/el-meson-de-pepe-key-west-logo.webp",
     description: "Authentic Cuban restaurant in Mallory Square, Key West. Family owned and operated since 1984, serving traditional Cuban cuisine with live Salsa music.",
     address: {
       "@type": "PostalAddress",
@@ -38,7 +38,7 @@ export function RestaurantSchema() {
       latitude: "24.555239984199105",
       longitude: "-81.80786948498226",
     },
-    url: "https://www.elmeson.co",
+    url: "https://www.elmesondepepe.com",
     telephone: "+1-305-295-2620",
     email: "info@elmesondepepe.com",
     priceRange: "$$",
@@ -85,10 +85,10 @@ export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://www.elmeson.co/#organization",
+    "@id": "https://www.elmesondepepe.com/#organization",
     name: "El Meson de Pepe",
-    url: "https://www.elmeson.co",
-    logo: "https://www.elmeson.co/images/el-meson-de-pepe-key-west-logo.webp",
+    url: "https://www.elmesondepepe.com",
+    logo: "https://www.elmesondepepe.com/images/el-meson-de-pepe-key-west-logo.webp",
     description: "Authentic Cuban restaurant in Key West, Florida, serving traditional Cuban cuisine since 1984.",
     address: {
       "@type": "PostalAddress",
@@ -127,7 +127,7 @@ export function BreadcrumbSchema({ items }: { items: Array<{ name: string; url: 
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `https://www.elmeson.co${item.url}`,
+      item: `https://www.elmesondepepe.com${item.url}`,
     })),
   };
 
@@ -221,7 +221,7 @@ export function ArticleSchema({
     "@type": "Article",
     headline,
     description,
-    image: image || "https://www.elmeson.co/images/el-meson-de-pepe-key-west-logo.webp",
+    image: image || "https://www.elmesondepepe.com/images/el-meson-de-pepe-key-west-logo.webp",
     datePublished,
     dateModified: dateModified || datePublished,
     author: {
@@ -233,7 +233,7 @@ export function ArticleSchema({
       name: "El Meson de Pepe",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.elmeson.co/images/el-meson-de-pepe-key-west-logo.webp",
+        url: "https://www.elmesondepepe.com/images/el-meson-de-pepe-key-west-logo.webp",
       },
     },
   };

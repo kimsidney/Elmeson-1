@@ -6,10 +6,21 @@ import { BreadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Private Parties & Events - El Meson de Pepe Key West",
   description: "Host your private party or event at El Meson de Pepe in Key West. Custom catering, live music, and authentic Cuban cuisine for your special occasion.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Private Parties & Events - El Meson de Pepe Key West",
     description: "Host your private party or event at El Meson de Pepe in Key West. Custom catering and authentic Cuban cuisine.",
-    url: "https://www.elmeson.co/parties",
+    url: "https://www.elmesondepepe.com/parties",
   },
   alternates: {
     canonical: "/parties",

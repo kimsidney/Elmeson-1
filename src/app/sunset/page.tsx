@@ -7,13 +7,24 @@ import { BreadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Sunset Celebration - Live Salsa Music at El Meson de Pepe",
   description: "Join us for the famous Key West Sunset Celebration at El Meson de Pepe. Live Salsa band, authentic Cuban food, and stunning sunset views in Mallory Square.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Sunset Celebration - Live Salsa Music at El Meson de Pepe",
     description: "Join us for the famous Key West Sunset Celebration. Live Salsa band, authentic Cuban food, and stunning sunset views.",
-    url: "https://www.elmeson.co/sunset",
+    url: "https://www.elmesondepepe.com/sunset",
     images: [
       {
-        url: "/images/hero.png",
+        url: "/images/hero.webp",
         width: 1200,
         height: 630,
         alt: "Sunset Celebration at El Meson de Pepe",

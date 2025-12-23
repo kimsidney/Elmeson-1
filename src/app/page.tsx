@@ -10,10 +10,21 @@ import { RestaurantSchema, BreadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "El Meson de Pepe - Authentic Cuban Food | Key West Restaurant",
   description: "Experience the authentic taste of Cuba at El Meson de Pepe in Mallory Square, Key West. Family owned and operated since 1984. Authentic Cuban cuisine, live Salsa music, and sunset celebrations.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "El Meson de Pepe - Authentic Cuban Food | Key West Restaurant",
     description: "Experience the authentic taste of Cuba at El Meson de Pepe in Mallory Square, Key West. Family owned and operated since 1984.",
-    url: "https://www.elmeson.co",
+    url: "https://www.elmesondepepe.com",
     images: [
       {
         url: "/images/key-west-cuban-food.webp",

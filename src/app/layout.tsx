@@ -35,14 +35,14 @@ export const metadata: Metadata = {
   authors: [{ name: "El Meson de Pepe" }],
   creator: "El Meson de Pepe",
   publisher: "El Meson de Pepe",
-  metadataBase: new URL("https://www.elmeson.co"),
+  metadataBase: new URL("https://www.elmesondepepe.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.elmeson.co",
+    url: "https://www.elmesondepepe.com",
     siteName: "El Meson de Pepe",
     title: "El Meson de Pepe - Authentic Cuban Food | Key West Restaurant",
     description: "Experience the authentic taste of Cuba at El Meson de Pepe in Mallory Square, Key West. Family owned and operated since 1984.",

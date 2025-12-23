@@ -5,13 +5,24 @@ import { BreadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Our Story - Family Tradition & Cuban Heritage",
   description: "Learn about El Meson de Pepe's history, founded by Pepe Diaz in 1984. Discover our family's journey from Cuba to Key West and our commitment to authentic Cuban cuisine.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Our Story - Family Tradition & Cuban Heritage | El Meson de Pepe",
     description: "Learn about El Meson de Pepe's history, founded by Pepe Diaz in 1984. Discover our family's journey from Cuba to Key West.",
-    url: "https://www.elmeson.co/story",
+    url: "https://www.elmesondepepe.com/story",
     images: [
       {
-        url: "/images/hero.png",
+        url: "/images/hero.webp",
         width: 1200,
         height: 630,
         alt: "El Meson de Pepe - Our Story",
@@ -41,13 +52,15 @@ export default function StoryPage() {
                 <div className="space-y-12">
                     <div className="relative h-[400px] w-full rounded-xl overflow-hidden shadow-2xl">
                         <Image
-                            src="/images/hero.png"
+                            src="/images/hero.webp"
                             alt="The Diaz Family"
                             fill
                             className="object-cover"
                             loading="lazy"
                             quality={85}
                             sizes="(max-width: 768px) 100vw, 768px"
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
                     </div>

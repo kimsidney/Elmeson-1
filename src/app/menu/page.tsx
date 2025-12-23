@@ -4,13 +4,24 @@ import { MenuSchema, BreadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Menu - Authentic Cuban Cuisine",
   description: "Explore our authentic Cuban menu featuring traditional dishes like Ropa Vieja, Lechón Asado, and Picadillo. Appetizers, entrees, and Cuban cocktails at El Meson de Pepe.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Menu - Authentic Cuban Cuisine | El Meson de Pepe",
     description: "Explore our authentic Cuban menu featuring traditional dishes from Cuba. Key West's premier Cuban restaurant.",
-    url: "https://www.elmeson.co/menu",
+    url: "https://www.elmesondepepe.com/menu",
     images: [
       {
-        url: "/images/food_intro.png",
+        url: "/images/food_intro.webp",
         width: 1200,
         height: 630,
         alt: "El Meson de Pepe Cuban Menu",

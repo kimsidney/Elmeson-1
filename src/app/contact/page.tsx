@@ -6,10 +6,21 @@ import ContactForm from "@/components/contact/ContactForm";
 export const metadata: Metadata = {
   title: "Contact Us - Visit El Meson de Pepe in Key West",
   description: "Contact El Meson de Pepe in Mallory Square, Key West. Call us at 305-295-2620 or visit us at 410 Wall Street. Open daily 11 AM - 10 PM.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Contact Us - Visit El Meson de Pepe in Key West",
     description: "Contact El Meson de Pepe in Mallory Square, Key West. Call us at 305-295-2620 or visit us at 410 Wall Street.",
-    url: "https://www.elmeson.co/contact",
+    url: "https://www.elmesondepepe.com/contact",
   },
   alternates: {
     canonical: "/contact",
