@@ -8,9 +8,9 @@ import { convertWordPressContent } from "@/lib/wordpress-content";
 import blogPostsData from "@/data/blog-posts.json";
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const post = blogPostsData.find((p) => p.slug === params.slug);
+  const { slug } = await params;
+  const post = blogPostsData.find((p) => p.slug === slug);
   
   if (!post) {
     return {
@@ -29,8 +30,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const excerpt = post.excerpt || post.content.substring(0, 160).replace(/<[^>]*>/g, "") + "...";
-  const image = post.featuredImage 
-    ? `https://www.elmesondepepe.com/images/${post.featuredImage}`
+  const image = (post as any).featuredImage 
+    ? `https://www.elmesondepepe.com/images/${(post as any).featuredImage}`
     : "https://www.elmesondepepe.com/images/el-meson-de-pepe-key-west-logo.webp";
 
   return {
@@ -48,8 +49,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = blogPostsData.find((p) => p.slug === params.slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = blogPostsData.find((p) => p.slug === slug);
 
   if (!post) {
     notFound();
