@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, ArrowLeft } from "lucide-react";
+import { Calendar, ArrowLeft, Clock } from "lucide-react";
 import { BreadcrumbSchema, ArticleSchema } from "@/lib/schema";
 import { convertWordPressContent } from "@/lib/wordpress-content";
+import { getFeaturedImage, calculateReadingTime } from "@/lib/blog-utils";
+import RelatedPosts from "@/components/blog/RelatedPosts";
 import blogPostsData from "@/data/blog-posts.json";
 
 interface BlogPostPageProps {
@@ -30,8 +32,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const excerpt = post.excerpt || post.content.substring(0, 160).replace(/<[^>]*>/g, "") + "...";
-  const image = (post as any).featuredImage 
-    ? `https://www.elmesondepepe.com/images/${(post as any).featuredImage}`
+  const featuredImage = getFeaturedImage(post);
+  const image = featuredImage 
+    ? `https://www.elmesondepepe.com${featuredImage}`
     : "https://www.elmesondepepe.com/images/el-meson-de-pepe-key-west-logo.webp";
 
   return {
@@ -65,6 +68,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const content = convertWordPressContent(post.content);
   const excerpt = post.excerpt || post.content.substring(0, 200).replace(/<[^>]*>/g, "") + "...";
+  const featuredImage = getFeaturedImage(post);
+  const readingTime = calculateReadingTime(post.content);
 
   return (
     <>
@@ -79,7 +84,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <ArticleSchema
         headline={post.title}
         description={excerpt}
-        image={post.featuredImage ? `/images/${post.featuredImage}` : undefined}
+        image={featuredImage || undefined}
         datePublished={post.date}
         dateModified={post.modified}
       />
@@ -95,10 +100,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </Link>
 
           {/* Featured Image */}
-          {post.featuredImage && (
+          {featuredImage && (
             <div className="relative h-96 w-full rounded-xl overflow-hidden shadow-2xl mb-8">
               <Image
-                src={`/images/${post.featuredImage}`}
+                src={featuredImage}
                 alt={post.title}
                 fill
                 className="object-cover"
@@ -111,9 +116,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Header */}
           <header className="mb-8">
-            <div className="flex items-center space-x-2 text-sm text-gray-500 mb-4">
-              <Calendar size={16} aria-hidden="true" />
-              <time dateTime={post.date}>{formattedDate}</time>
+            <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
+              <div className="flex items-center space-x-2">
+                <Calendar size={16} aria-hidden="true" />
+                <time dateTime={post.date}>{formattedDate}</time>
+              </div>
+              <span>•</span>
+              <div className="flex items-center space-x-2">
+                <Clock size={16} aria-hidden="true" />
+                <span>{readingTime} min read</span>
+              </div>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-primary font-serif mb-4">
               {post.title}
@@ -122,10 +134,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </header>
 
           {/* Content */}
-          <article
-            className="prose prose-lg max-w-none text-gray-700"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+          <article className="prose prose-lg max-w-none text-gray-700 prose-headings:font-bold prose-headings:text-primary prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:font-semibold prose-img:rounded-lg prose-img:shadow-lg">
+            {content}
+          </article>
+
+          {/* Related Posts */}
+          <RelatedPosts currentPostSlug={post.slug} />
 
           {/* Back to Blog */}
           <div className="mt-16 pt-8 border-t border-gray-200">
