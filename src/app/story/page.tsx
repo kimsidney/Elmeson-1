@@ -52,7 +52,7 @@ export default function StoryPage() {
           <div className="space-y-12">
             <div className="relative h-[400px] w-full rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/key-west-cuba-history-2048x751.jpg"
+                src="/images/hero.jpg"
                 alt="The Diaz Family"
                 fill
                 className="object-cover"
