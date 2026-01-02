@@ -53,14 +53,14 @@ const BLOG_POSTS = blogPostsData
   .map(post => {
     const featuredImage = getFeaturedImage(post);
     const readingTime = calculateReadingTime(post.content);
-    
+
     return {
       id: post.id,
       title: post.title,
       excerpt: post.excerpt || getExcerpt(post.content),
       date: formatDate(post.date),
       slug: `/story/blog/${post.slug}`,
-      image: featuredImage || "/images/hero.webp",
+      image: featuredImage || "/images/hero.png",
       rawDate: post.date,
       readingTime,
       rawSlug: post.slug,
@@ -69,27 +69,27 @@ const BLOG_POSTS = blogPostsData
   .sort((a, b) => new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime());
 
 export default function BlogPage() {
-    return (
-        <>
-            <BreadcrumbSchema items={[
-                { name: "Home", url: "/" },
-                { name: "Our Story", url: "/story" },
-                { name: "Pepe's Key West Blog", url: "/story/blog" },
-            ]} />
-            <div className="bg-white min-h-screen pt-32 pb-20 px-4">
-            <div className="max-w-5xl mx-auto">
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl md:text-6xl font-bold text-primary font-serif mb-4">
-                        Pepe's Key West Blog
-                    </h1>
-                    <p className="text-gray-600 text-lg">Stories, guides, and insights from the heart of Key West</p>
-                    <div className="h-1 w-24 bg-secondary mx-auto mt-6" />
-                </div>
+  return (
+    <>
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "/" },
+        { name: "Our Story", url: "/story" },
+        { name: "Pepe's Key West Blog", url: "/story/blog" },
+      ]} />
+      <div className="bg-white min-h-screen pt-32 pb-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-6xl font-bold text-primary font-serif mb-4">
+              Pepe's Key West Blog
+            </h1>
+            <p className="text-gray-600 text-lg">Stories, guides, and insights from the heart of Key West</p>
+            <div className="h-1 w-24 bg-secondary mx-auto mt-6" />
+          </div>
 
-                {/* Search */}
-                <BlogListingClient posts={BLOG_POSTS} />
-            </div>
+          {/* Search */}
+          <BlogListingClient posts={BLOG_POSTS} />
         </div>
-        </>
-    );
+      </div>
+    </>
+  );
 }

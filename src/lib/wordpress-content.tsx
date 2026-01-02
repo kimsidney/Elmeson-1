@@ -10,7 +10,7 @@ import { convertWordPressUrlToRoute, isBlogPostUrl } from './blog-utils';
 function parseStyleString(styleStr: string): React.CSSProperties {
   const style: React.CSSProperties = {};
   if (!styleStr) return style;
-  
+
   // Split by semicolon and parse each property
   styleStr.split(';').forEach(prop => {
     const [key, value] = prop.split(':').map(s => s.trim());
@@ -20,7 +20,7 @@ function parseStyleString(styleStr: string): React.CSSProperties {
       (style as any)[camelKey] = value;
     }
   });
-  
+
   return style;
 }
 
@@ -30,22 +30,27 @@ function parseStyleString(styleStr: string): React.CSSProperties {
  */
 function parseChildren(children: DOMNode[] | undefined): React.ReactNode {
   if (!children || children.length === 0) return null;
-  
+
   const result: React.ReactNode[] = [];
-  
-  for (const child of children) {
+
+  children.forEach((child, index) => {
+    const node = child as any;
     if (typeof child === 'string') {
       result.push(child);
+    } else if (node.type === 'text') {
+      result.push(node.data);
+    } else if (node.type === 'comment') {
+      // Ignore comments
     } else if (child instanceof Element) {
       const tag = child.name;
       const attrs = child.attribs || {};
       const childNodes = child.children || [];
-      
+
       // Recursively parse children
       const parsedChildren = parseChildren(Array.from(childNodes) as DOMNode[]);
-      
+
       // Create props object, filtering out dangerous attributes
-      const props: any = {};
+      const props: any = { key: index };
       for (const [key, value] of Object.entries(attrs)) {
         // Convert className from class
         if (key === 'class') {
@@ -57,18 +62,18 @@ function parseChildren(children: DOMNode[] | undefined): React.ReactNode {
           props[key] = value;
         }
       }
-      
+
       // Create React element directly
-      const childrenArray = parsedChildren !== null 
+      const childrenArray = parsedChildren !== null
         ? (Array.isArray(parsedChildren) ? parsedChildren : [parsedChildren])
         : [];
-      
+
       result.push(React.createElement(tag, props, ...childrenArray));
     } else {
       result.push(String(child));
     }
-  }
-  
+  });
+
   return result.length === 1 ? result[0] : result.length > 0 ? result : null;
 }
 
@@ -77,22 +82,22 @@ function parseChildren(children: DOMNode[] | undefined): React.ReactNode {
  */
 function convertImagePath(src: string): string {
   if (!src) return src;
-  
+
   // Handle full WordPress URLs
   if (src.includes('wp-content/uploads')) {
     return src.replace(/https?:\/\/www\.elmesondepepe\.com\/wp-content\/uploads\//, '/images/');
   }
-  
+
   // Already a local path
   if (src.startsWith('/images/')) {
     return src;
   }
-  
+
   // External URLs - return as-is
   if (src.startsWith('http://') || src.startsWith('https://')) {
     return src;
   }
-  
+
   return src;
 }
 
@@ -109,6 +114,8 @@ export function convertWordPressContent(content: string): React.ReactElement {
     // Remove WordPress block comments
     .replace(/<!-- wp:[^>]+ -->/g, '')
     .replace(/<!-- \/wp:[^>]+ -->/g, '')
+    // Unescape JSON quotes
+    .replace(/\\"/g, '"')
     // Convert shortcodes to HTML
     .replace(/\[row[^\]]*\]/g, '<div class="wp-row">')
     .replace(/\[\/row\]/g, '</div>')
@@ -140,7 +147,10 @@ export function convertWordPressContent(content: string): React.ReactElement {
       if (domNode instanceof Element && domNode.attribs) {
         // Handle images - convert to Next.js Image component
         if (domNode.name === 'img') {
-          const src = domNode.attribs.src;
+          // Sanitize src to remove any extra quotes
+          let src = domNode.attribs.src || '';
+          src = src.replace(/^["']|["']$/g, '');
+
           const alt = domNode.attribs.alt || '';
           const width = domNode.attribs.width ? parseInt(domNode.attribs.width) : 800;
           const height = domNode.attribs.height ? parseInt(domNode.attribs.height) : 600;
@@ -165,7 +175,7 @@ export function convertWordPressContent(content: string): React.ReactElement {
           // Use Next.js Image for local images
           // Use a reasonable aspect ratio if dimensions are invalid
           const aspectRatio = width > 0 && height > 0 ? width / height : 16 / 9;
-          
+
           return (
             <div className="my-6 relative w-full rounded-lg overflow-hidden shadow-lg" style={{ aspectRatio: aspectRatio }}>
               <Image
@@ -193,7 +203,7 @@ export function convertWordPressContent(content: string): React.ReactElement {
           const isBlogPost = isExternal ? isBlogPostUrl(href) : isBlogPostUrl(href);
 
           const children = parseChildren(domNode.children as DOMNode[]);
-          
+
           if (isExternal && !isBlogPost) {
             // External link - use regular anchor tag
             return (

@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPostsData.find((p) => p.slug === slug);
-  
+
   if (!post) {
     return {
       title: "Post Not Found",
@@ -33,9 +33,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   const excerpt = post.excerpt || post.content.substring(0, 160).replace(/<[^>]*>/g, "") + "...";
   const featuredImage = getFeaturedImage(post);
-  const image = featuredImage 
+  const image = featuredImage
     ? `https://www.elmesondepepe.com${featuredImage}`
-    : "https://www.elmesondepepe.com/images/el-meson-de-pepe-key-west-logo.webp";
+    : "https://www.elmesondepepe.com/images/hero.png";
 
   return {
     title: `${post.title} | Pepe's Key West Blog`,
@@ -156,4 +156,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </>
   );
 }
-
