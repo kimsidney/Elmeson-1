@@ -5,35 +5,35 @@ import { Music, Users, Calendar } from "lucide-react";
 import { BreadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Sunset Celebration - Live Salsa Music at El Meson de Pepe",
-  description: "Join us for the famous Key West Sunset Celebration at El Meson de Pepe. Live Salsa band, authentic Cuban food, and stunning sunset views in Mallory Square.",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  openGraph: {
     title: "Sunset Celebration - Live Salsa Music at El Meson de Pepe",
-    description: "Join us for the famous Key West Sunset Celebration. Live Salsa band, authentic Cuban food, and stunning sunset views.",
-    url: "https://www.elmesondepepe.com/sunset",
-    images: [
-      {
-        url: "/images/hero.webp",
-        width: 1200,
-        height: 630,
-        alt: "Sunset Celebration at El Meson de Pepe",
-      },
-    ],
-  },
-  alternates: {
-    canonical: "/sunset",
-  },
+    description: "Join us for the famous Key West Sunset Celebration at El Meson de Pepe. Live Salsa band, authentic Cuban food, and stunning sunset views in Mallory Square.",
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
+    },
+    openGraph: {
+        title: "Sunset Celebration - Live Salsa Music at El Meson de Pepe",
+        description: "Join us for the famous Key West Sunset Celebration. Live Salsa band, authentic Cuban food, and stunning sunset views.",
+        url: "https://www.elmesondepepe.com/sunset",
+        images: [
+            {
+                url: "/images/hero.webp",
+                width: 1200,
+                height: 630,
+                alt: "Sunset Celebration at El Meson de Pepe",
+            },
+        ],
+    },
+    alternates: {
+        canonical: "/sunset",
+    },
 };
 
 export default function SunsetCelebrationPage() {
@@ -41,31 +41,16 @@ export default function SunsetCelebrationPage() {
         <div className="bg-white min-h-screen">
             {/* Hero Section with Split Images */}
             <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 grid grid-cols-2">
-                    {/* Left side - Band playing */}
-                    <div className="relative">
-                        <Image
-                            src="/images/hero.png"
-                            alt="Live music at sunset"
-                            fill
-                            className="object-cover brightness-75"
-                            loading="lazy"
-                            quality={85}
-                            sizes="50vw"
-                        />
-                    </div>
-                    {/* Right side - Sunset crowd */}
-                    <div className="relative">
-                        <Image
-                            src="/images/hero.png"
-                            alt="Sunset celebration crowd"
-                            fill
-                            className="object-cover brightness-90"
-                            loading="lazy"
-                            quality={85}
-                            sizes="50vw"
-                        />
-                    </div>
+                <div className="absolute inset-0">
+                    <Image
+                        src="/sunset-from-el-meson-2048x1087.jpg"
+                        alt="Sunset Celebration at El Meson de Pepe"
+                        fill
+                        className="object-cover brightness-75"
+                        priority
+                        quality={90}
+                        sizes="100vw"
+                    />
                 </div>
 
                 {/* Overlay */}

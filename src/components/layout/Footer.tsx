@@ -116,7 +116,7 @@ export default function Footer() {
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-secondary hover:bg-secondary/90 text-white text-xs font-bold uppercase tracking-widest py-3.5 rounded-lg transition-all shadow-lg shadow-secondary/20 hover:shadow-secondary/30 flex items-center justify-center gap-2"
+                                className="w-full bg-primary hover:bg-secondary text-white text-xs font-bold uppercase tracking-widest py-3.5 rounded-lg transition-all shadow-lg shadow-secondary/20 hover:shadow-secondary/30 flex items-center justify-center gap-2"
                             >
                                 <span>Subscribe</span>
                                 <Mail size={14} />

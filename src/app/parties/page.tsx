@@ -38,7 +38,7 @@ export default function PrivatePartiesPage() {
                 {/* Hero Section */}
                 <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
                     <div className="absolute inset-0">
-                        <div className="absolute inset-0 bg-[url('/images/hero.webp')] bg-cover bg-center" />
+                        <div className="absolute inset-0 bg-[url('/images/key-west-restaurant-private-parties-2048x751.jpg')] bg-cover bg-center" />
                         <div className="absolute inset-0 bg-black/50" />
                     </div>
                     <div className="relative z-10 text-center px-4">
@@ -311,21 +311,21 @@ export default function PrivatePartiesPage() {
                                     desc: "Pepe's Cuban Nachos, Beef Paella, Seafood Combo..."
                                 }
                             ].map((pkg, idx) => (
-                                <div key={idx} className={`rounded-3xl p-10 flex flex-col transition-all group ${pkg.premium ? 'bg-gray-900 text-white shadow-2xl scale-105 z-10 border border-gray-800' : 'bg-white border border-gray-100 hover:border-secondary shadow-lg'}`}>
-                                    <h3 className={`text-2xl font-bold font-serif mb-2 ${pkg.premium ? 'text-secondary' : 'text-primary'}`}>{pkg.name}</h3>
+                                <div key={idx} className={`rounded-3xl p-10 flex flex-col transition-all group ${pkg.premium ? 'bg-white border-2 border-secondary shadow-2xl scale-105 z-10' : 'bg-white border border-gray-100 hover:border-secondary shadow-lg'}`}>
+                                    <h3 className="text-2xl font-bold font-serif mb-2 text-primary">{pkg.name}</h3>
                                     <div className="mb-8">
-                                        <span className={`text-4xl font-bold font-serif ${pkg.premium ? 'text-white' : 'text-primary'}`}>{pkg.price}</span>
-                                        <span className={`text-xs ml-2 ${pkg.premium ? 'text-white/60' : 'text-gray-400'}`}>per person</span>
+                                        <span className="text-4xl font-bold font-serif text-primary">{pkg.price}</span>
+                                        <span className="text-xs ml-2 text-gray-400">per person</span>
                                     </div>
                                     <ul className="space-y-4 grow mb-10">
                                         {pkg.items.map((item, i) => (
-                                            <li key={i} className="flex items-center gap-3 text-sm font-medium">
-                                                <Utensils className={`w-4 h-4 ${pkg.premium ? 'text-secondary' : 'text-secondary'}`} />
+                                            <li key={i} className="flex items-center gap-3 text-sm font-medium text-gray-700">
+                                                <Utensils className="w-4 h-4 text-secondary" />
                                                 {item}
                                             </li>
                                         ))}
                                     </ul>
-                                    <p className={`text-xs italic leading-relaxed border-t pt-6 ${pkg.premium ? 'text-white/60 border-white/10' : 'text-gray-500 border-gray-100'}`}>
+                                    <p className="text-xs italic leading-relaxed border-t pt-6 text-gray-500 border-gray-100">
                                         {pkg.desc}
                                     </p>
                                 </div>
